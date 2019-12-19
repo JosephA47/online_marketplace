@@ -1,17 +1,23 @@
-const express = require("express");
-const path = require("path");
-const PORT = process.env.PORT || 3001;
-const app = express();
+var express = require("express");
 
+var PORT = process.env.PORT || 3000;
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+var app = express();
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+app.use(express.static("public"));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+var routes = require("./controller/store_controller");
+
+app.use(routes);
 
 app.listen(PORT, function() {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
+  console.log("App now listening at localhost:" + PORT);
 });
