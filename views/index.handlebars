@@ -5,8 +5,10 @@
     {{#each product}}
     {{#unless inCart}}
     <h1>{{this.id}}: {{this.item}}</h1>
-    <button class="change-devour" data-id="{{id}}" data-changeDevour="{{devour}}">
-      {{#if inCart}}Consume da product!{{else}}Consume da product!{{/if}}
+    <p><strong>{{this.seller}}</strong></p>
+    <p><strong>${{this.price}}</strong></p>
+    <button class="add-toCart" data-id="{{id}}" data-newinCart="{{buy}}">
+      {{#if inCart}}Product Purchased{{else}}Purchase Product{{/if}}
     </button>
     {{/unless}}
     {{/each}}
@@ -14,23 +16,18 @@
 </div>
 
 <div style="float: right;">
-  <h2>products that have been DEVOURED!</h2>
+  <h2>Your Purchased products</h2>
   <ul>
     {{#each product}}
     {{#if inCart}}
     <h1>{{this.id}}: {{this.item}}</h1>
+    <p><strong>{{this.seller}}</strong></p>
+    <p><strong>${{this.price}}</strong></p>
     {{/if}}
     {{/each}}
   </ul>
-</div>
 
-<div style="float: left; clear: left">
-  <h2>Create new product</h2>
-  <div class="form-group">
-    <label for="title">Enter your new product:</label>
-    <form class="newproduct-form" action="/product/insert" method="POST">
-      <input type="text" id="productName" value="" placeholder="Enter Here" name="productName">
-      <button type="submit" id="add-product">Create product</button>
-    </form>
+  <div>
+    <h1 class="totalBox">Total: ${{this.priceTotal}}</h1>
   </div>
 </div>
