@@ -24,8 +24,8 @@ $(function() {
         var priceTotal = $(".totalBox").val()
         priceTotal += response.products.price
         console.log(priceTotal);
-        location.reload();
       }
     );
+    location.reload();
   });
 });
